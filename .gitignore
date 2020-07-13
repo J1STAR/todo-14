@@ -1,0 +1,7 @@
+node_modules
+
+# mac의 폴더 정보
+.DS_Store
+
+dist
+public
