@@ -17,14 +17,22 @@
   "bugs": {
     "url": "https://github.com/woowa-techcamp-2020/todo-14/issues"
   },
+  "browserslist": [
+    "> 1%"
+  ],
   "homepage": "https://github.com/woowa-techcamp-2020/todo-14#readme",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.10.4",
+    "@typescript-eslint/eslint-plugin": "^3.6.0",
+    "@typescript-eslint/parser": "^3.6.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.6.0",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "html-webpack-plugin": "^4.3.0",
     "image-loader": "0.0.1",
     "postcss": "^7.0.32",
