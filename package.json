@@ -9,7 +9,8 @@
     "dev": "npm-run-all --parallel dev:client dev:server",
     "build:client": "webpack",
     "build:server": "rimraf dist/* && ttsc",
-    "build": "npm run build:client && npm run build:server"
+    "build": "npm run build:client && npm run build:server",
+    "start": "node dist/main.js"
   },
   "repository": {
     "type": "git",
