@@ -6,11 +6,13 @@
   "scripts": {
     "dev:client": "webpack --watch",
     "dev:server": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/server/main.ts",
-    "dev": "npm-run-all --parallel dev:client dev:server",
+    "dev": "npm-run-all --parallel dev:client dev:server open",
     "build:client": "webpack",
     "build:server": "rimraf dist/* && ttsc",
     "build": "npm run build:client && npm run build:server",
-    "start": "node dist/main.js"
+    "open": "wait-on tcp:12100 && open http://localhost:12100",
+    "start": "node dist/main.js",
+    "start:browser": "npm-run-all --parallel start open"
   },
   "repository": {
     "type": "git",
@@ -60,6 +62,7 @@
     "tsconfig-paths": "^3.9.0",
     "ttypescript": "^1.5.10",
     "typescript": "^3.9.6",
+    "wait-on": "^5.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   }
