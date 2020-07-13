@@ -1,7 +1,5 @@
 const path = require('path')
 
-const webpack = require('webpack')
-
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
@@ -9,10 +7,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const config = {
   mode: 'development',
   entry: {
-    bundle: './src/index.js',
+    bundle: './src/client/index.js',
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
     filename:
       process.env.NODE_ENV === 'production'
         ? '[name].[chunkhash].js'
@@ -62,7 +60,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: 'src/index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/client/index.html' }),
   ],
 }
 
