@@ -26,9 +26,7 @@ router.delete('/board/:boardId/column/:columnId', async ({ params }, res) => {
 
   await query(sql)
 
-  res.json({
-    success: true,
-  })
+  res.sendStatus(200)
 })
 
 export { router as removeAColumnRouter }

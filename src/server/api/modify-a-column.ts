@@ -16,10 +16,6 @@ export type ModifyColumnRequestBody = {
   previousColumnId: number
 }
 
-export type ModifyColumnResponseData = {
-  success: boolean
-}
-
 router.put('/board/:boardId/column/:columnId', async (req, res) => {
   const { params, body } = req
 
@@ -55,9 +51,7 @@ router.put('/board/:boardId/column/:columnId', async (req, res) => {
 
   // TODO: Create an activity after the modification
 
-  const result: ModifyColumnResponseData = { success: true }
-
-  res.json(result)
+  res.sendStatus(200)
 })
 
 export { router as modifyAColumnRouter }
