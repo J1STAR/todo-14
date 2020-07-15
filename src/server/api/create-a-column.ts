@@ -1,8 +1,7 @@
-import { Board, Column } from '@/types/schema'
-
 import { MysqlInsertOrUpdateResult } from '@/types/query'
-import { escape as esc } from '../modules/escape'
+import { Board, Column } from '@/types/schema'
 import express from 'express'
+import { escape as esc } from '../modules/escape'
 import { query } from '../modules/query'
 
 const router = express.Router()
