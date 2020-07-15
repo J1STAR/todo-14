@@ -17,17 +17,16 @@ export type CreateColumnRequestBody = {
 }
 
 router.post('/board/:boardId', async (req, res) => {
-  const { boardId } = (req.params as unknown) as CreateColumnRequestParams
-  const { name, previousColumnId } = req.body as CreateColumnRequestBody
+  const boardId = parseInt(req.params.boardId)
+  const name = req.body.name
+  const previousColumnId = parseInt(req.body.previousColumnId)
 
   // If one or many of the requested data are missing,
   // consider the request as a bad request
   if (
-    boardId === undefined ||
-    boardId === null ||
+    !boardId ||
     !(name && name.length > 0 && name.trim().length > 0) ||
-    previousColumnId === undefined ||
-    previousColumnId === null
+    !previousColumnId
   ) {
     res.sendStatus(400)
 
@@ -65,6 +64,8 @@ router.post('/board/:boardId', async (req, res) => {
     res.sendStatus(500)
     return
   }
+
+  // TODO: Create an activity after the creation
 
   res.json({ column })
 })
