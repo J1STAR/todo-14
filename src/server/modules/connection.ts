@@ -6,6 +6,8 @@ const connection = mysql.createConnection({
   user: config.DB_USER,
   password: config.DB_PW,
   database: config.DB_NAME,
+  charset: 'utf8mb4',
+  timezone: 'UTC+9',
 })
 
 export { connection }
