@@ -1,3 +1,4 @@
+import { api } from '@/server/api'
 // appRoot는 package.json이 위치한 프로젝트의 최상위 디렉토리를 가리킵니다
 import appRoot from 'app-root-path'
 import bodyParser from 'body-parser'
@@ -11,12 +12,15 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use(express.static(appRoot.resolve('/public')))
 
-const router = express.Router()
+const homeRouter = express.Router()
 
-router.get('/', (req, res) => {
+homeRouter.get('/', (req, res) => {
   res.sendFile(appRoot.resolve('/public/index.html'))
 })
 
-app.use(router)
+app.use(homeRouter)
+
+// API 사용
+app.use(api)
 
 export { app, PORT }
