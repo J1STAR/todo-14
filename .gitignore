@@ -4,6 +4,7 @@ node_modules
 .DS_Store
 
 dist
-public
+public/*
+!public/fonts
 
 **/config/index.ts
