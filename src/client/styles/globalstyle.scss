@@ -1,0 +1,47 @@
+:root {
+  // Colors
+  --white: #ffffff;
+  --alt-black: #444444;
+  --light-blue: #eff1f3;
+  --super-light-blue: #eff1f3;
+  --baemint: #10b3ad;
+  --red: #f64646;
+  --blue: #0091fa;
+  --gray: #808082;
+  --light-gray: #acacac;
+
+  // Radius
+  --column-radius: 20px;
+  --card-radius: 15px;
+  --btn-radius: 10px;
+
+  // Shadow
+  --baemin-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  --todo-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+  --activity-item-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  background-color: var(--light-blue);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  outline: none;
+  box-sizing: border-box;
+}
+
+button {
+  appearance: none;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+textarea {
+  border: none;
+}

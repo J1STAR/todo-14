@@ -7,7 +7,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const config = {
   mode: 'development',
   entry: {
-    bundle: './src/client/index.js',
+    bundle: './src/client/main.ts',
   },
   output: {
     path: path.resolve(__dirname, 'public'),
@@ -60,7 +60,7 @@ const config = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({ template: 'src/client/index.html' }),
+    new HtmlWebpackPlugin({ template: 'src/client/pages/index.html' }),
   ],
 }
 
