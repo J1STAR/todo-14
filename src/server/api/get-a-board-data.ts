@@ -4,7 +4,7 @@ import { query } from '../modules/query'
 
 const router = express.Router()
 
-type GetBoardDataResponseData = {
+export type GetBoardDataResponseData = {
   board: {
     id: number
     name: string
