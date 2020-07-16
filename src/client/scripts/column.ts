@@ -1,7 +1,7 @@
 const newColumnBtn = document.querySelector('.column.new') as HTMLDivElement
 
 if (newColumnBtn) {
-  newColumnBtn.addEventListener('click', () => {
+  newColumnBtn.addEventListener('click', async () => {
     const columnHtml = `
 <div class="column">
   <div class="column-header">
@@ -26,7 +26,26 @@ if (newColumnBtn) {
 
     newColumnElm.className = 'column'
 
+    // Insert the new column element
     newColumnBtn.parentElement.insertBefore(newColumnElm, newColumnBtn)
+
+    fetch('/board/1', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        // TODO: default to what?
+        name: 'untitled column',
+        // TODO: dynamically get the previous column id
+        previousColumnId: 1,
+      }),
+    }).then((res) => {
+      if (!res.ok) {
+        alert('API Error')
+        newColumnElm.parentElement.removeChild(newColumnElm)
+      }
+    })
 
     const columnNameElm = newColumnElm.querySelector(
       '.column-name'
