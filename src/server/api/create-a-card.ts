@@ -41,9 +41,13 @@ const composeCardResponse = (
   }
 }
 
-router.post('/board/[boardId]/column/[columnId]/card', async (req, res) => {
+router.post('/board/:boardId/column/:columnId/card', async (req, res) => {
   const { content } = req.body as CreateCardRequestBody
   const { columnId } = (req.params as unknown) as CreateCardRequestParams
+  if (!content) {
+    res.sendStatus(404)
+    return
+  }
 
   // TODO: get from session
   const userId = 1
