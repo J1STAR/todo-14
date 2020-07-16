@@ -29,6 +29,10 @@
     right: 35px;
     top: 50%;
     transform: translateY(-50%);
+
+    .icon {
+      font-size: 27px;
+    }
   }
 }
 
@@ -36,7 +40,7 @@ $elm-padding: 19px;
 
 .columns-container {
   padding-top: 4px;
-  padding-bottom: 30px;
+  padding-bottom: 25px;
   flex: 1;
   overflow-x: auto;
   white-space: nowrap;
@@ -49,7 +53,7 @@ $elm-padding: 19px;
     display: inline-block;
     min-width: 353px;
     max-width: 353px;
-    margin-left: 30px;
+    margin-left: 25px;
     overflow-y: hidden;
 
     display: flex;
@@ -71,14 +75,78 @@ $elm-padding: 19px;
       .column-name {
         font-size: 16px;
         font-weight: 600;
+        max-width: calc(100% - 75px);
+        white-space: initial;
       }
 
       .actions {
+        opacity: 0;
+        pointer-events: none;
+        transform: scale(0.95);
+        transition: opacity 200ms ease, transform 200ms ease;
+        display: flex;
+        align-self: flex-start;
+
+        .action-btn {
+          .icon {
+            font-size: 15px;
+            font-weight: 700;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+            width: 23px;
+            height: 23px;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 200ms ease, color 200ms ease;
+          }
+
+          &.new-card-btn .icon {
+            color: var(--baemint);
+
+            &:hover {
+              color: var(--white);
+              background-color: var(--baemint);
+            }
+          }
+
+          &.delete-column-btn {
+            margin-left: 15px;
+
+            .icon {
+              color: var(--red);
+
+              &:hover {
+                color: var(--white);
+                background-color: var(--red);
+              }
+            }
+          }
+        }
       }
+    }
+
+    &:hover .column-header .actions {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: all;
     }
 
     .cards-container {
       padding: 0 $elm-padding $elm-padding;
+
+      &:empty {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before {
+          content: '아직 카드가 없습니다.';
+          color: var(--gray);
+          font-size: 16px;
+        }
+      }
 
       .card {
         overflow: hidden;
@@ -139,7 +207,7 @@ $elm-padding: 19px;
             flex: 1;
             height: 35px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
             border-radius: var(--btn-radius);
 
             &.add {
@@ -164,6 +232,14 @@ $elm-padding: 19px;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    color: var(--gray);
+
+    .icon {
+      font-size: 41px;
+      color: var(--baemint);
+      margin-bottom: 5px;
+      text-shadow: var(--baemin-shadow);
+    }
   }
 
   .column-spacer {
