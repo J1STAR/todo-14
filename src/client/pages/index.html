@@ -10,7 +10,7 @@
       <nav class="navigation">
         <h1 class="board-name">오늘 뭐 하지</h1>
         <button class="activity-btn">
-          종
+          <i class="icon">bell_fill</i>
         </button>
       </nav>
 
@@ -20,13 +20,17 @@
             <h2 class="column-name">To Do</h2>
 
             <div class="actions">
-              <button class="new-card-btn">NEW</button>
-              <button class="delete-column-btn">DEL</button>
+              <button class="action-btn new-card-btn">
+                <i class="icon">plus</i>
+              </button>
+              <button class="action-btn delete-column-btn">
+                <i class="icon">xmark</i>
+              </button>
             </div>
           </div>
 
           <div class="cards-container">
-            <div class="card new">
+            <!-- <div class="card new">
               <textarea
                 class="content"
                 spellcheck="false"
@@ -36,7 +40,7 @@
                 <button class="card-btn add">추가</button>
                 <button class="card-btn cancel">취소</button>
               </div>
-            </div>
+            </div> -->
             <div class="card">
               <h1 class="card-title">Card Title</h1>
               <p class="card-body">
@@ -108,8 +112,8 @@
         </div>
 
         <div class="column new">
-          <button>플러스</button>
-          <p>컬럼 추가</p>
+          <button><i class="icon">plus_app_fill</i></button>
+          <p>Add a Column</p>
         </div>
 
         <div class="column-spacer"></div>
