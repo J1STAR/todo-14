@@ -11,7 +11,7 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     // paths alias를 relative path로 변경해주는 플러그인
     // ttypescript (ttsc)와 함께 사용
     "plugins": [{ "transform": "@zerollup/ts-transform-paths" }],
