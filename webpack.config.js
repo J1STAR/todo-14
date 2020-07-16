@@ -59,7 +59,9 @@ const config = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: ['**/*', '!fonts'],
+    }),
     new HtmlWebpackPlugin({ template: 'src/client/pages/index.html' }),
   ],
 }
