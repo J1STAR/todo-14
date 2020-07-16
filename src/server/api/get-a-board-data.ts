@@ -36,6 +36,14 @@ router.get('/board/:boardId', async ({ params }, res) => {
   // TODO: !!! Use correct types
 
   const [board] = await query(`SELECT * FROM board WHERE id=${escape(boardId)}`)
+
+  if (!board) {
+    res.json({
+      board: null,
+    })
+    return
+  }
+
   const columns = (await query(
     `SELECT id, name, previousColumnId, createdAt from \`column\` WHERE boardId=${escape(
       boardId
