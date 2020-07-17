@@ -47,14 +47,14 @@ router.get('/board/:boardId', async ({ params }, res) => {
   const columns = (await query(
     `SELECT id, name, previousColumnId, createdAt from \`column\` WHERE boardId=${escape(
       boardId
-    )}`
+    )} ORDER BY COALESCE(previousColumnId, id)`
   )) as []
 
   for (const column of columns) {
     const cards = await query(
       `SELECT id, content, icon, previousCardId, createdAt, editedAt from card WHERE columnId=${
         (column as any).id
-      }`
+      }  ORDER BY COALESCE(previousCardId, id)`
     )
 
     ;(column as any)['cards'] = cards
