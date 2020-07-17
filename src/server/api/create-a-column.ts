@@ -1,7 +1,7 @@
 import { MysqlInsertOrUpdateResult } from '@/types/query'
 import { Board, Column } from '@/types/schema'
 import express from 'express'
-import { escape as esc } from '../modules/escape'
+import { escape } from '../modules/escape'
 import { query } from '../modules/query'
 
 const router = express.Router()
@@ -34,7 +34,7 @@ router.post('/board/:boardId', async (req, res) => {
 
   // Find the board corresponding to the requested `boardId`
   const board = (await query(
-    `SELECT * FROM board WHERE id=${esc(boardId)}`
+    `SELECT * FROM board WHERE id=${escape(boardId)}`
   )) as Board[]
 
   // If the board doesn't exist,
@@ -52,7 +52,7 @@ router.post('/board/:boardId', async (req, res) => {
     INSERT INTO \`column\`
     (boardId, name, previousColumnId)
     VALUES
-    (${esc(boardId)}, "${esc(name)}", ${esc(previousColumnId)})
+    (${escape(boardId)}, ${escape(name)}, ${escape(previousColumnId)})
   `)
 
   const [column] = await query<Column[]>(
