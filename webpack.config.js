@@ -1,7 +1,6 @@
 const path = require('path')
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 /** @type {import('webpack').Configuration} */
 const config = {
@@ -11,12 +10,10 @@ const config = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename:
-      process.env.NODE_ENV === 'production'
-        ? '[name].[chunkhash].js'
-        : '[name].[hash].js',
+    filename: '[name].js',
   },
   resolve: {
+    extensions: ['.ts', '.js', '.scss'],
     alias: {
       '@': path.join(__dirname, 'src'),
     },
@@ -59,9 +56,9 @@ const config = {
     },
   },
   plugins: [
-    new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!fonts'],
-    }),
+    // new CleanWebpackPlugin({
+    //   cleanOnceBeforeBuildPatterns: ['**/*', '!fonts'],
+    // }),
     new HtmlWebpackPlugin({ template: 'src/client/pages/index.html' }),
   ],
 }
