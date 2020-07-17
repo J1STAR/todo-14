@@ -20,11 +20,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "webpack.config.js",
-    "src/client",
-    "public",
-    "*.config.js"
-  ]
+  "exclude": ["node_modules", "webpack.config.js", "public", "*.config.js"]
 }

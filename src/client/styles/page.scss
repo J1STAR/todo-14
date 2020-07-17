@@ -150,6 +150,7 @@ $elm-padding: 19px;
 
       .card {
         overflow: hidden;
+        position: relative;
         background-color: var(--white);
         padding: $elm-padding;
         box-shadow: var(--todo-shadow);
@@ -166,9 +167,15 @@ $elm-padding: 19px;
           margin-bottom: 100px;
         }
 
+        &.hide {
+          display: none;
+        }
+
         .card-title {
           font-size: 16px;
           font-weight: 600;
+
+          pointer-events: none;
         }
 
         .card-body {
@@ -176,6 +183,14 @@ $elm-padding: 19px;
           font-size: 16px;
           font-weight: 400;
           margin-top: 15px;
+
+          pointer-events: none;
+        }
+
+        .delete-card-btn {
+          position: absolute;
+          right: 11px;
+          top: 6px;
         }
       }
 
@@ -210,7 +225,8 @@ $elm-padding: 19px;
             font-weight: 500;
             border-radius: var(--btn-radius);
 
-            &.add {
+            &.add,
+            &.edit {
               background-color: var(--baemint);
               color: var(--white);
             }
@@ -218,6 +234,11 @@ $elm-padding: 19px;
             &.cancel {
               background-color: var(--light-blue);
               margin-left: 10px;
+            }
+            &:disabled {
+              color: var(--baemint);
+              background-color: var(--white);
+              border: 1px solid var(--baemint);
             }
           }
         }
