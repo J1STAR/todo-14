@@ -1,13 +1,19 @@
 import { parseContent } from '@/client/utils/content-parser'
 
-const generateElement = (html: string): HTMLElement => {
+export const generateElement = (html: string): HTMLElement => {
   const parser = new DOMParser()
   const newDoc = parser.parseFromString(html, 'text/html')
 
   return newDoc.body.firstElementChild as HTMLElement
 }
 
-export const generateColumn = ({ id, name }: { id: number; name: string }) => {
+export const generateColumn = ({
+  id,
+  name,
+}: {
+  id: number
+  name: string
+}): HTMLElement => {
   const columnHtml = `
   <div class="column" data-column-index="${id}">
     <div class="column-header">
@@ -35,7 +41,7 @@ export const generateCard = ({
 }: {
   id: number
   content: string
-}) => {
+}): HTMLElement => {
   const [title, body] = parseContent(content)
 
   const cardHtml = `
