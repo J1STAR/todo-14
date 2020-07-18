@@ -1,5 +1,3 @@
-const newColumnBtn = document.querySelector('.column.new') as HTMLDivElement
-
 async function modifyColumn({
   boardId,
   columnId,
@@ -23,9 +21,8 @@ async function modifyColumn({
   return res.ok
 }
 
-if (newColumnBtn) {
-  newColumnBtn.addEventListener('click', async () => {
-    const columnHtml = `
+function onClickNewColumnBtn(newColumnBtn: HTMLElement) {
+  const columnHtml = `
 <div class="column">
   <div class="column-header">
     <h2 class="column-name" spellcheck>untitled column</h2>
@@ -42,82 +39,79 @@ if (newColumnBtn) {
   <div class="cards-container"></div>
 </div>
 `
-    const newColumnElm = new DOMParser().parseFromString(
-      columnHtml,
-      'text/html'
-    ).body.firstElementChild
+  const newColumnElm = new DOMParser().parseFromString(columnHtml, 'text/html')
+    .body.firstElementChild
 
-    newColumnElm.className = 'column'
+  newColumnElm.className = 'column'
 
-    const columnNameElm = newColumnElm.querySelector(
-      '.column-name'
-    ) as HTMLHeadingElement
+  const columnNameElm = newColumnElm.querySelector(
+    '.column-name'
+  ) as HTMLHeadingElement
 
-    fetch('/board/1', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: columnNameElm.textContent,
-        // TODO: dynamically get the previous column id
-        previousColumnId: 1,
-      }),
-    })
-      .then((res) => {
-        if (!res.ok) {
-          alert('API Error')
-          newColumnElm.parentElement.removeChild(newColumnElm)
+  fetch('/board/1', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      name: columnNameElm.textContent,
+      // TODO: dynamically get the previous column id
+      previousColumnId: 1,
+    }),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        alert('API Error')
+        newColumnElm.parentElement.removeChild(newColumnElm)
 
-          return { column: null }
-        }
-
-        return res.json()
-      })
-      .then((data) => {
-        const column = data.column
-
-        if (!column) {
-          return
-        }
-
-        newColumnElm.setAttribute('data-column-id', column.id)
-        // Insert the new column element
-        newColumnBtn.parentElement.insertBefore(newColumnElm, newColumnBtn)
-        columnNameElm.contentEditable = 'true'
-        const columnNameRange = document.createRange()
-        columnNameRange.setStartBefore(columnNameElm.firstChild)
-        columnNameRange.setEndAfter(columnNameElm.firstChild)
-
-        const sel = document.getSelection()
-
-        sel.removeAllRanges()
-        sel.addRange(columnNameRange)
-      })
-
-    columnNameElm.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault()
-        columnNameElm.removeAttribute('contenteditable')
+        return { column: null }
       }
+
+      return res.json()
+    })
+    .then((data) => {
+      const column = data.column
+
+      if (!column) {
+        return
+      }
+
+      newColumnElm.setAttribute('data-column-id', column.id)
+      // Insert the new column element
+      newColumnBtn.parentElement.insertBefore(newColumnElm, newColumnBtn)
+      columnNameElm.contentEditable = 'true'
+      const columnNameRange = document.createRange()
+      columnNameRange.setStartBefore(columnNameElm.firstChild)
+      columnNameRange.setEndAfter(columnNameElm.firstChild)
+
+      const sel = document.getSelection()
+
+      sel.removeAllRanges()
+      sel.addRange(columnNameRange)
     })
 
-    columnNameElm.addEventListener('blur', async function bc() {
+  columnNameElm.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
       columnNameElm.removeAttribute('contenteditable')
-      window.getSelection().removeAllRanges()
+    }
+  })
 
-      await modifyColumn({
-        // TODO: use current board id
-        boardId: 1,
-        columnId: parseInt(newColumnElm.getAttribute('data-column-id')),
-        data: {
-          name: columnNameElm.textContent,
-          previousColumnId: 1,
-        },
-      })
+  columnNameElm.addEventListener('blur', async function bc() {
+    columnNameElm.removeAttribute('contenteditable')
+    window.getSelection().removeAllRanges()
 
-      columnNameElm.removeEventListener('blur', bc)
+    await modifyColumn({
+      // TODO: use current board id
+      boardId: 1,
+      columnId: parseInt(newColumnElm.getAttribute('data-column-id')),
+      data: {
+        name: columnNameElm.textContent,
+        previousColumnId: 1,
+      },
     })
+
+    columnNameElm.removeEventListener('blur', bc)
   })
 }
 
@@ -149,10 +143,13 @@ window.addEventListener('click', async (e) => {
   const target = e.target as HTMLElement
 
   const deleteColumnBtn = target.closest('.action-btn.delete-column-btn')
+  const newColumnBtn = target.closest('.column.new') as HTMLDivElement
 
   if (deleteColumnBtn) {
     const columnElm = deleteColumnBtn.closest('.column') as HTMLElement
 
     removeColumnHandler(columnElm)
+  } else if (newColumnBtn) {
+    onClickNewColumnBtn(newColumnBtn)
   }
 })
