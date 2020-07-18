@@ -6,6 +6,22 @@ import {
 import { parseContent } from '@/client/utils/content-parser'
 import { eventCollector } from '@/client/utils/event-collector'
 
+import { createACardAPI } from '@/client/api/create-a-card'
+import { removeACardAPI } from '@/client/api/remove-a-card'
+
+const getBoardId = () => {
+  const boardId = document.querySelector('.app').getAttribute('data-board-id')
+  return parseInt(boardId)
+}
+const getColumnId = (columnElm) => {
+  const columnId = columnElm.getAttribute('data-column-id')
+  return parseInt(columnId)
+}
+const getCardId = (cardElm) => {
+  const cardId = cardElm.getAttribute('data-card-id')
+  return parseInt(cardId)
+}
+
 //  textarea 입력에 따라 카드추가 버튼 활성/비활성화
 const createCardOkBtnClickHandler = (e) => {
   e.stopPropagation()
@@ -43,7 +59,7 @@ const createCardFormHandler = (columnElm: HTMLElement) => {
 }
 
 // '추가' 확인
-const createCardHandler = (
+const createCardHandler = async (
   columnElm: HTMLElement,
   cardFormElm: HTMLElement
 ) => {
@@ -53,9 +69,14 @@ const createCardHandler = (
 
   const cardContainerElem = columnElm.querySelector('.cards-container')
 
-  // TODO: api로 id받아와서 넣어줄것
-  const id = Math.floor(Math.random() * 1000)
-  const newCardElm = generateCard({ id, content })
+  const boardId = getBoardId()
+  const columnId = getColumnId(columnElm)
+
+  const newCard = await createACardAPI({
+    urlParam: { boardId, columnId },
+    bodyParam: { content },
+  })
+  const newCardElm = generateCard({ id: newCard.id, content })
 
   cardFormElm.remove()
   cardContainerElem.prepend(newCardElm)
@@ -104,8 +125,18 @@ const editCardFormHandler = (columnElm: HTMLElement, cardElm: HTMLElement) => {
 }
 
 // '삭제'
-const deleteCardHandler = (cardElm: HTMLElement) => {
-  cardElm.remove()
+const deleteCardHandler = async (
+  columnElm: HTMLElement,
+  cardElm: HTMLElement
+) => {
+  const boardId = getBoardId()
+  const columnId = getColumnId(columnElm)
+  const cardId = getCardId(cardElm)
+
+  const success = await removeACardAPI({
+    urlParam: { boardId, columnId, cardId },
+  })
+  success && cardElm.remove()
 }
 
 window.addEventListener('click', (e) => {
@@ -146,7 +177,7 @@ window.addEventListener('click', (e) => {
   }
 
   if (deleteCardBtnElm) {
-    deleteCardHandler(cardElm)
+    deleteCardHandler(columnElm, cardElm)
     return
   }
 
