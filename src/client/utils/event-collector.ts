@@ -20,15 +20,15 @@ class EventCollector {
   }
 
   remove = (el: HTMLElement, type: string) => {
-    const [listener] = this.eventListenersList.filter((l) => {
+    const idx = this.eventListenersList.findIndex((l) => {
       return l.el === el && l.type === type
     })
-    console.log(this.eventListenersList)
-    console.log(listener)
 
-    if (!listener) return
+    if (idx < 0) return
 
-    el.removeEventListener(type, listener.handler)
+    el.removeEventListener(type, this.eventListenersList[idx].handler)
+
+    this.eventListenersList.splice(idx, 1)
   }
 }
 

@@ -4,7 +4,7 @@ import {
   generateEditCardForm,
 } from './html-generator'
 import { parseContent } from '@/client/utils/content-parser'
-import { eventCollector } from '@/client/utils/event-garbage-collector'
+import { eventCollector } from '@/client/utils/event-collector'
 
 //  textarea 입력에 따라 카드추가 버튼 활성/비활성화
 const createCardOkBtnClickHandler = (e) => {
