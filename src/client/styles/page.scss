@@ -87,41 +87,8 @@ $elm-padding: 19px;
         display: flex;
         align-self: flex-start;
 
-        .action-btn {
-          .icon {
-            font-size: 15px;
-            font-weight: 700;
-            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-            width: 23px;
-            height: 23px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-color 200ms ease, color 200ms ease;
-          }
-
-          &.new-card-btn .icon {
-            color: var(--baemint);
-
-            &:hover {
-              color: var(--white);
-              background-color: var(--baemint);
-            }
-          }
-
-          &.delete-column-btn {
-            margin-left: 15px;
-
-            .icon {
-              color: var(--red);
-
-              &:hover {
-                color: var(--white);
-                background-color: var(--red);
-              }
-            }
-          }
+        .action-btn.delete-column-btn {
+          margin-left: 15px;
         }
       }
     }
@@ -156,6 +123,8 @@ $elm-padding: 19px;
         box-shadow: var(--todo-shadow);
         border-radius: var(--card-radius);
         white-space: initial;
+        transition: transform 0.2s ease;
+        cursor: pointer;
 
         margin-bottom: 15px;
 
@@ -169,6 +138,10 @@ $elm-padding: 19px;
 
         &.hide {
           display: none;
+        }
+
+        &:hover {
+          transform: scale(1.03);
         }
 
         .card-title {
@@ -189,8 +162,21 @@ $elm-padding: 19px;
 
         .delete-card-btn {
           position: absolute;
-          right: 11px;
-          top: 6px;
+          right: 13px;
+          top: 13px;
+
+          opacity: 0;
+          transform: scale(0.95);
+          transition: opacity 200ms ease, transform 200ms ease;
+
+          pointer-events: none;
+        }
+
+        &:hover {
+          .delete-card-btn {
+            opacity: 1;
+            pointer-events: all;
+          }
         }
       }
 
