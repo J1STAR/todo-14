@@ -1,44 +1,8 @@
 import { generateElement, generateColumn, generateCard } from './html-generator'
 
-import { GetBoardsListResponseData } from '@/server/api/get-boards-list'
+import { getBoardListAPI } from '@/client/api/get-boards-list'
+import { getABoardDataAPI } from '@/client/api/get-a-board-data'
 import { GetBoardDataResponseData } from '@/server/api/get-a-board-data'
-
-const getBoardList = async () => {
-  const res = await fetch('/board', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-
-  if (!res.ok) return
-
-  const { boards } = (await res.json()) as GetBoardsListResponseData
-
-  if (!boards.length) return
-
-  await getBoardData(boards[0].id)
-
-  // getBoardData()
-}
-
-const getBoardData = async (boardId) => {
-  const res = await fetch(`/board/${boardId}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-
-  if (!res.ok) return
-
-  const data = (await res.json()) as GetBoardDataResponseData
-
-  render(data)
-}
-
-type Columns = GetBoardDataResponseData['board']['columns'][0]
-type Cards = Columns['cards'][0]
 
 const setBoardName = (id: number, name: string) => {
   const appElm = document.querySelector('.app') as HTMLElement
@@ -48,9 +12,7 @@ const setBoardName = (id: number, name: string) => {
   appElm.setAttribute('data-board-id', id.toString())
 }
 
-const render = ({ board }: GetBoardDataResponseData) => {
-  setBoardName(board.id, board.name)
-
+const render = (board: GetBoardDataResponseData['board']) => {
   const containerElm = generateElement(
     `<main class="columns-container"></main>`
   )
@@ -88,6 +50,15 @@ const render = ({ board }: GetBoardDataResponseData) => {
   app.appendChild(containerElm)
 }
 
-;(async () => {
-  await getBoardList()
-})()
+const init = async () => {
+  const boards = await getBoardListAPI()
+  if (!boards?.length) return
+
+  const boardData = await getABoardDataAPI(boards[0].id)
+  if (!boardData) return
+
+  setBoardName(boardData.id, boardData.name)
+  render(boardData)
+}
+
+init()
