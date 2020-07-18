@@ -15,7 +15,7 @@ export const generateColumn = ({
   name: string
 }): HTMLElement => {
   const columnHtml = `
-  <div class="column" data-column-index="${id}">
+  <div class="column" data-column-id="${id}">
     <div class="column-header">
       <h2 class="column-name">${name}</h2>
       <div class="actions">
@@ -45,7 +45,7 @@ export const generateCard = ({
   const [title, body] = parseContent(content)
 
   const cardHtml = `
-  <div class="card" data-card-index="${id}">
+  <div class="card" data-card-id="${id}">
     <h1 class="card-title">${title}</h1>
     <p class="card-body">${body}</p>
     <button class="delete-card-btn">
@@ -55,4 +55,48 @@ export const generateCard = ({
   `
 
   return generateElement(cardHtml)
+}
+
+export const generateNewCardForm = ({
+  content,
+}: {
+  content: string
+}): HTMLElement => {
+  const newCardForm = `
+  <div class="card new">
+    <textarea
+      class="content"
+      spellcheck="false"
+      autocomplete="off"
+    >${content}</textarea>
+    <div class="buttons">
+      <button class="card-btn add" disabled="true">추가</button>
+      <button class="card-btn cancel">취소</button>
+    </div>
+  </div>
+  `
+
+  return generateElement(newCardForm)
+}
+
+export const generateEditCardForm = ({
+  content,
+}: {
+  content: string
+}): HTMLElement => {
+  const newCardForm = `
+  <div class="card new">
+    <textarea
+      class="content"
+      spellcheck="false"
+      autocomplete="off"
+    >${content}</textarea>
+    <div class="buttons">
+      <button class="card-btn edit" disabled="true">수정</button>
+      <button class="card-btn cancel">취소</button>
+    </div>
+  </div>
+  `
+
+  return generateElement(newCardForm)
 }
