@@ -20,10 +20,10 @@ export const generateColumn = ({
       <h2 class="column-name">${name}</h2>
       <div class="actions">
         <button class="action-btn new-card-btn">
-          <i class="icon">plus</i>
+          <i class="icon add">plus</i>
         </button>
         <button class="action-btn delete-column-btn">
-          <i class="icon">xmark</i>
+          <i class="icon delete">xmark</i>
         </button>
       </div>
     </div>
@@ -48,7 +48,9 @@ export const generateCard = ({
   <div class="card" data-card-index="${id}">
     <h1 class="card-title">${title}</h1>
     <p class="card-body">${body}</p>
-    <button class="delete-card-btn">DEL</button>
+    <button class="delete-card-btn">
+      <i class="icon delete">xmark</i>
+    </button>
   </div>
   `
 
