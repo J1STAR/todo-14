@@ -12,7 +12,7 @@ export type GetBoardsListResponseData = {
   boards: BoardResopnseData[]
 }
 
-router.get('/boards', async (req, res) => {
+router.get('/board', async (req, res) => {
   // TODO: get from session
   const userId = 1
 

@@ -4,7 +4,7 @@ import { GetBoardsListResponseData } from '@/server/api/get-boards-list'
 import { GetBoardDataResponseData } from '@/server/api/get-a-board-data'
 
 const getBoardList = async () => {
-  const res = await fetch('/boards', {
+  const res = await fetch('/board', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
