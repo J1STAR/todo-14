@@ -117,8 +117,8 @@ ghostNode.style.boxShadow = `0 30px 60px rgba(0, 0, 0, .3)`
 
 ```js
 window.addEventListener('pointermove', (e) => {
-  const offsetX = e.pageX - originalLeft
-  const offsetY = e.pageY - originalTop
+  const offsetX = e.pageX - initialX
+  const offsetY = e.pageY - initialY
 
   const toX = originalLeft + offsetX
   const toY = originalTop + offsetY
