@@ -18,7 +18,7 @@
 
 ### Drag and Drop
 
-Drag and drop feature in this project was implemented without using the existing browser **Drag and Drop API**. For more information and tutorials, check out the dedicated doc.
+Drag and drop feature in this project was implemented without using the existing browser **Drag and Drop API**. For more information and tutorials, check out the [dedicated doc](./doc/Drag-and-Drop-with-Animation.md).
 
 ## Development
 
